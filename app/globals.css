@@ -12,11 +12,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: white;
+  --foreground: #ededed;
 }
 
 body {
@@ -28,6 +26,7 @@ body {
 .container {
   padding: 20px;
 }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -37,7 +36,8 @@ body {
 
 .hero-section {
   width: 100%;
-  height: 350px; /* גובה הבאנר */
+  height: 350px;
+  /* גובה הבאנר */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -62,4 +62,3 @@ body {
   overflow-y: auto;
   margin-top: 15vh;
 }
-
