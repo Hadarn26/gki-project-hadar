@@ -12,7 +12,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main>
+    <main className="page-content">
       <div className="hero-section" >
         <img src="/images/Screenshot 2025-10-29 102657.png" alt="Hero Image" />
       </div>

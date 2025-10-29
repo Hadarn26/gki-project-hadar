@@ -56,3 +56,10 @@ body {
   color: #333;
 }
 
+.page-content {
+  min-height: 80vh;
+  padding: 40px 20px;
+  overflow-y: auto;
+  margin-top: 15vh;
+}
+
