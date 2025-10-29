@@ -34,3 +34,25 @@ body {
   gap: 20px;
 }
 
+
+.hero-section {
+  width: 100%;
+  height: 350px; /* גובה הבאנר */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+

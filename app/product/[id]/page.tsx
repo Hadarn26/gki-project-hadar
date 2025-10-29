@@ -1,50 +1,82 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { fetchProductById } from "../../utils/api";
 import { useCart } from "../../contexts/CartContext";
-import { useWishList } from "../../contexts/WishListContext";
-import styles from "./page.module.css";
+import { useWishList } from "../../contexts/WishListContext"; // ✅ יבוא WishList
+import styles from "./page.module.css"; // ✅ יבוא CSS מודול
 
-interface Props {
-  params: { id: string };
-}
+export default function ProductPage() {
+  const params = useParams();
+  const idParam = params?.id;
+  const id = Array.isArray(idParam) ? idParam[0] : idParam;
 
-export default function ProductPage({ params }: Props) {
-  const { id } = params;
   const [product, setProduct] = useState<any>(null);
   const { addToCart } = useCart();
-  const { addToWishList } = useWishList();
-  const router = useRouter();
+  const { addToWishList } = useWishList(); // ✅ שימוש בפונקציה
 
   useEffect(() => {
-    if (id) fetchProductById(Number(id)).then(data => setProduct(data));
+    if (id) {
+      fetchProductById(id).then(setProduct);
+    }
   }, [id]);
 
-  if (!product) return <p>Loading...</p>;
+  if (!product) return <p className="container text-center p-8">Loading...</p>;
+
+  // נתונים נוספים חסרים במקור, נוסיף אותם כאן אם ה-API מחזיר אותם:
+  const description = product.description || "No description available for this product.";
 
   return (
     <main className={styles.container}>
-      <button className={styles.backButton} onClick={() => router.back()}>
-        ← Back
-      </button>
-      <div className={styles.product}>
-        <img src={product.image} alt={product.title} className={styles.image} />
+      <div className={styles['product-wrapper']}>
+        {/* אזור תמונה */}
+        <div className={styles['image-area']}>
+          <img
+            src={product.image}
+            alt={product.title}
+            className={styles.image}
+          />
+        </div>
+
+        {/* אזור פרטים */}
         <div className={styles.details}>
           <h1>{product.title}</h1>
-          <p>{product.category}</p>
-          <p>{product.description}</p>
-          <p>${product.price}</p>
-          <button onClick={() =>
-            addToCart({ id: product.id, title: product.title, price: product.price, image: product.image, quantity: 1 })
-          }>
-            Add to Cart
-          </button>
-          <button onClick={() =>
-            addToWishList({ id: product.id, title: product.title, price: product.price, image: product.image })
-          }>
-            ♥ WishList
-          </button>
+          <p className={styles.category}>{product.category}</p>
+          <p className={styles.price}>${product.price.toFixed(2)}</p>
+          
+          <p className={styles.description}>{description}</p>
+          
+          <div className={styles['button-group']}>
+            {/* כפתור Add to Cart */}
+            <button
+              onClick={() =>
+                addToCart({
+                  id: product.id,
+                  title: product.title,
+                  price: product.price,
+                  image: product.image,
+                  quantity: 1,
+                })
+              }
+              className={styles['add-to-cart']}
+            >
+              ADD TO CART
+            </button>
+            
+            {/* כפתור Wish List */}
+            <button 
+                onClick={() => addToWishList({ 
+                    id: product.id, 
+                    title: product.title, 
+                    price: product.price, 
+                    image: product.image 
+                })}
+                className={styles['wishlist-btn']}
+            >
+                <span style={{color: 'red'}}>♥</span> WishList
+            </button>
+          </div>
         </div>
       </div>
     </main>
