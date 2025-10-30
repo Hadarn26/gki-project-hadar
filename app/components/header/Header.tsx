@@ -42,7 +42,7 @@ export default function Header() {
 
       <div className={styles.actions}>
         <button className={styles.wishlistButton} onClick={goToWishList}>
-          ♥
+          ❤️
           {wishList.length > 0 && (
             <span className={styles.badge}>{wishList.length}</span>
           )}
