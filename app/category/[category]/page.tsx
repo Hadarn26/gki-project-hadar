@@ -4,38 +4,22 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import ProductCard from "../../components/productCard/ProductCard";
 import { fetchProductsByCategory } from "../../utils/api";
+import { categoryMap } from "./titleMap";
+import { Product } from "../../types";
 
 export default function CategoryPage() {
   const params = useParams() as { category?: string };
   const urlCategory = params.category;
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Array<Product>>([]);
+  const apiCategory = categoryMap[urlCategory as keyof typeof categoryMap];
 
-  const categoryMap: Record<string, string> = {
-    mens: "men's clothing",
-    womens: "women's clothing",
-    jewelery: "jewelery",
-    electronics: "electronics"
-  };
+  useEffect(() => { fetchProductsByCategory(apiCategory).then(data => setProducts(data)) }, [apiCategory]);
 
-  const apiCategory = urlCategory ? categoryMap[urlCategory] : "";
-
-  useEffect(() => {
-    if (apiCategory) {
-      fetchProductsByCategory(apiCategory).then(data => setProducts(data));
-    }
-  }, [apiCategory]);
-
-  const displayTitle = urlCategory
-    ? urlCategory === "mens"
-      ? "Men's Clothing"
-      : urlCategory === "womens"
-      ? "Women's Clothing"
-      : urlCategory.charAt(0).toUpperCase() + urlCategory.slice(1)
-    : "";
+  const displayCategory = categoryMap[urlCategory as keyof typeof categoryMap];
 
   return (
     <main className="container">
-      <h1>{displayTitle}</h1>
+      <h1>{displayCategory}</h1>
       <div className="grid">
         {products.map(product => (
           <ProductCard
