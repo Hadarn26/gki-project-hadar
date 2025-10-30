@@ -46,7 +46,6 @@ export default function CartDropdown() {
                 ))}
               </ul>
 
-              {/* ✅ הוספת תצוגת ה-Total והכפתורים בהתאם לתמונה */}
               <div className={styles['cart-total-footer']}>
                   <span>Total:</span>
                   <span className={styles['total-amount']}>
