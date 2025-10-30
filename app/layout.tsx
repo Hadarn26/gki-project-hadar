@@ -1,4 +1,3 @@
-// app/layout.tsx
 import "./globals.css";
 import { ReactNode } from "react";
 import Header from "./components/header/Header";
@@ -14,12 +13,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <div className="page-content">
         <CartProvider>
           <WishListProvider>
             <Header />
             {children}
           </WishListProvider>
         </CartProvider>
+        </div>
       </body>
     </html>
   );

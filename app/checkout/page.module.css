@@ -1,86 +1,147 @@
-/* checkout/page.module.css */
+.title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
 
-.checkout-items {
+.title span {
+  color: #f7a620;
+}
+
+.empty {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+}
+
+.checkoutContainer {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  max-width: 600px;
+  gap: 20px;
+  max-width: 800px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-.checkout-item {
+.itemCard {
   display: flex;
-  gap: 15px;
-  padding: 10px 0;
   align-items: center;
-  border-bottom: 1px solid #eee; /* קו הפרדה בין פריטים */
+  gap: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
 }
 
-.checkout-item:last-of-type {
+.itemCard:last-of-type {
   border-bottom: none;
 }
 
-.checkout-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain; /* כדי שהתמונה לא תחתך */
+.itemCard img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
 
-.checkout-item-info {
+.itemInfo {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  flex-grow: 1;
+  gap: 6px;
 }
 
-.checkout-item-info h3 {
-  font-size: 16px;
+.itemInfo h3 {
+  font-size: 18px;
   font-weight: bold;
-}
-
-.checkout-item-info p {
-  font-size: 14px;
-}
-
-.checkout-item-info input[type="number"] {
-  width: 50px;
-  padding: 3px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-/* סגנון ל-Total ו-Complete Purchase */
-.total-summary {
-  display: flex;
-  justify-content: flex-end; /* יישור לימין */
-  align-items: center;
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.total-summary h2 {
-  font-size: 24px;
   color: #333;
-  margin-right: 20px;
 }
 
-.complete-purchase-btn {
-  padding: 12px 25px;
-  background-color: #f7a620; /* הצבע הכתום שבתמונה */
-  color: white;
+.itemInfo p {
+  font-size: 15px;
+  color: #555;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantityControl button {
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
   border: none;
+  background-color: #f7a620;
+  color: white;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.quantityControl button:hover {
+  background-color: #e59410;
+}
+
+.quantityControl span {
+  min-width: 30px;
+  text-align: center;
   font-weight: bold;
+  font-size: 16px;
+}
+
+.itemTotal {
+  font-weight: bold;
+  color: #333;
+}
+
+.removeBtn {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  align-self: flex-start;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.removeBtn:hover {
+  background: #e03d3f;
+}
+
+.totalSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  padding: 15px 20px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.totalSummary h2 {
+  font-size: 22px;
+  color: #333;
+}
+
+.completeBtn {
+  background-color: #f7a620;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-weight: bold;
+  cursor: pointer;
   text-transform: uppercase;
   transition: background-color 0.3s;
 }
 
-.complete-purchase-btn:hover {
+.completeBtn:hover {
   background-color: #e59410;
 }

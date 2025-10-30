@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { fetchProductById } from "../../utils/api";
 import { useCart } from "../../contexts/CartContext";
-import { useWishList } from "../../contexts/WishListContext"; // ✅ יבוא WishList
-import styles from "./page.module.css"; // ✅ יבוא CSS מודול
+import { useWishList } from "../../contexts/WishListContext";
+import styles from "./page.module.css"; 
 
 export default function ProductPage() {
   const params = useParams();
@@ -14,7 +14,7 @@ export default function ProductPage() {
 
   const [product, setProduct] = useState<any>(null);
   const { addToCart } = useCart();
-  const { addToWishList } = useWishList(); // ✅ שימוש בפונקציה
+  const { addToWishList } = useWishList(); 
 
   useEffect(() => {
     if (id) {
@@ -24,13 +24,11 @@ export default function ProductPage() {
 
   if (!product) return <p className="container text-center p-8">Loading...</p>;
 
-  // נתונים נוספים חסרים במקור, נוסיף אותם כאן אם ה-API מחזיר אותם:
   const description = product.description || "No description available for this product.";
 
   return (
     <main className={styles.container}>
       <div className={styles['product-wrapper']}>
-        {/* אזור תמונה */}
         <div className={styles['image-area']}>
           <img
             src={product.image}
@@ -39,7 +37,6 @@ export default function ProductPage() {
           />
         </div>
 
-        {/* אזור פרטים */}
         <div className={styles.details}>
           <h1>{product.title}</h1>
           <p className={styles.category}>{product.category}</p>
@@ -48,7 +45,6 @@ export default function ProductPage() {
           <p className={styles.description}>{description}</p>
           
           <div className={styles['button-group']}>
-            {/* כפתור Add to Cart */}
             <button
               onClick={() =>
                 addToCart({
@@ -64,7 +60,6 @@ export default function ProductPage() {
               ADD TO CART
             </button>
             
-            {/* כפתור Wish List */}
             <button 
                 onClick={() => addToWishList({ 
                     id: product.id, 

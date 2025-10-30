@@ -15,7 +15,7 @@ interface CartContextType {
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
-  clearCart: () => void; // ✅ נוספה פונקציה חדשה
+  clearCart: () => void; 
   totalPrice: number;
 }
 
@@ -56,8 +56,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const clearCart = () => {
-    setCartItems([]); // ✅ מנקה את כל המוצרים
-    localStorage.removeItem("cart"); // ✅ מוחק גם מה־localStorage
+    setCartItems([]); 
+    localStorage.removeItem("cart"); 
   };
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -69,7 +69,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         addToCart,
         removeFromCart,
         updateQuantity,
-        clearCart, // ✅ אל תשכחי להוסיף כאן
+        clearCart, 
         totalPrice,
       }}
     >

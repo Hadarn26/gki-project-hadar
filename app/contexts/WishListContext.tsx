@@ -1,5 +1,4 @@
 "use client";
-// /src/contexts/WishListContext.tsx
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 
 export interface WishListItem {

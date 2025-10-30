@@ -1,5 +1,4 @@
 "use client";
-// app/page.tsx
 import { useEffect, useState } from "react";
 import ProductCard from "./components/productCard/ProductCard";
 import { fetchProducts } from "./utils/api";
@@ -12,7 +11,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="page-content">
+    <main>
       <div className="hero-section" >
         <img src="/images/Screenshot 2025-10-29 102657.png" alt="Hero Image" />
       </div>

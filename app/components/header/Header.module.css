@@ -3,26 +3,29 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.8); 
+  background-color: rgba(255, 255, 255, 0.95);
   color: #333;
   position: fixed;
   top: 0;
   width: 100%;
   height: 12vh;
-  z-index: 10;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.logo img {
-  width: 100px; 
+.logoImg {
+  width: 100px;
   height: 60px;
+  object-fit: contain;
 }
 
-.header nav {
+.nav {
   display: flex;
   gap: 20px;
+  transition: all 0.3s ease;
 }
 
-.header nav a {
+.nav a {
   color: #333;
   text-decoration: none;
   font-weight: bold;
@@ -30,16 +33,66 @@
   border-bottom: 2px solid transparent;
 }
 
-.header nav a:hover {
-  border-bottom: 2px solid #ffcc00; 
+.nav a:hover {
+  border-bottom: 2px solid #ffcc00;
 }
 
-.header button {
+.actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.wishlistButton {
+  font-size: 1.5rem;
   background: none;
   border: none;
   color: #333;
   cursor: pointer;
-  font-size: 16px;
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+  .nav {
+    position: absolute;
+    top: 12vh;
+    right: 0;
+    flex-direction: column;
+    background: white;
+    width: 200px;
+    padding: 15px;
+    border-left: 1px solid #eee;
+    box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    margin-right: 10px;
+  }
 }

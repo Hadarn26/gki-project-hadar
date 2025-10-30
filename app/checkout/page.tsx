@@ -6,44 +6,63 @@ import styles from "./page.module.css";
 export default function CheckoutPage() {
   const { cartItems, totalPrice, removeFromCart, updateQuantity, clearCart } = useCart();
 
-  const handleQuantityChange = (id: number, quantity: number) => {
-    if (quantity < 1) return;
-    updateQuantity(id, quantity);
+  const handleQuantityChange = (id: number, delta: number) => {
+    const item = cartItems.find(i => i.id === id);
+    if (!item) return;
+    const newQuantity = item.quantity + delta;
+    if (newQuantity < 1) return;
+    updateQuantity(id, newQuantity);
   };
 
   const handleCompletePurchase = () => {
-    alert("Purchase completed!");
-    clearCart(); // ✅ מנקה את כל העגלה
+    alert("Purchase completed successfully!");
+    clearCart();
   };
 
-  // חלק מתוך checkout/page.tsx
-
   return (
-    <main className="container">
-      {/* כותרת 'Order Summary' או 'Checkout' - לבחירתך */}
-      <h1 style={{ textAlign: 'center' }}>Order <span style={{ color: '#f7a620' }}>Summary</span></h1> 
+    <main className="page-content">
+      <h1 className={styles.title}>
+        Order <span>Summary</span>
+      </h1>
+
       {cartItems.length === 0 ? (
-        <p style={{ textAlign: 'center' }}>Your cart is empty.</p>
+        <p className={styles.empty}>Your cart is empty.</p>
       ) : (
-        <div className={styles['checkout-items']}>
+        <div className={styles.checkoutContainer}>
           {cartItems.map(item => (
-            <div key={item.id} className={styles['checkout-item']}>
+            <div key={item.id} className={styles.itemCard}>
               <img src={item.image} alt={item.title} />
-              <div className={styles['checkout-item-info']}>
+              <div className={styles.itemInfo}>
                 <h3>{item.title}</h3>
-                <p>Quantity: {item.quantity}</p>
-                {/* הסרתי את שדה ה-input כדי להתאים למבנה סיכום ההזמנה שבתמונה, שם אין עדכון כמות */}
+                <p>${item.price.toFixed(2)}</p>
+
+                <div className={styles.quantityControl}>
+                  <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
+                  <span>{item.quantity}</span>
+                  <button onClick={() => handleQuantityChange(item.id, +1)}>+</button>
+                </div>
+
+                <p className={styles.itemTotal}>
+                  Total: ${(item.price * item.quantity).toFixed(2)}
+                </p>
+
+                <button
+                  className={styles.removeBtn}
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  Remove
+                </button>
               </div>
             </div>
           ))}
-          
-          <div className={styles['total-summary']}>
-            <h2>TOTAL: ${totalPrice.toFixed(2)}</h2>
-            <button 
+
+          <div className={styles.totalSummary}>
+            <h2>Total: ${totalPrice.toFixed(2)}</h2>
+            <button
               onClick={handleCompletePurchase}
-              className={styles['complete-purchase-btn']}
+              className={styles.completeBtn}
             >
-              COMPLETE ORDER
+              Complete Order
             </button>
           </div>
         </div>

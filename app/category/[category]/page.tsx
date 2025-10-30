@@ -7,18 +7,35 @@ import { fetchProductsByCategory } from "../../utils/api";
 
 export default function CategoryPage() {
   const params = useParams() as { category?: string };
-  const category = params.category;
+  const urlCategory = params.category;
   const [products, setProducts] = useState<any[]>([]);
 
+  const categoryMap: Record<string, string> = {
+    mens: "men's clothing",
+    womens: "women's clothing",
+    jewelery: "jewelery",
+    electronics: "electronics"
+  };
+
+  const apiCategory = urlCategory ? categoryMap[urlCategory] : "";
+
   useEffect(() => {
-    if (category) {
-      fetchProductsByCategory(category).then(data => setProducts(data));
+    if (apiCategory) {
+      fetchProductsByCategory(apiCategory).then(data => setProducts(data));
     }
-  }, [category]);
+  }, [apiCategory]);
+
+  const displayTitle = urlCategory
+    ? urlCategory === "mens"
+      ? "Men's Clothing"
+      : urlCategory === "womens"
+      ? "Women's Clothing"
+      : urlCategory.charAt(0).toUpperCase() + urlCategory.slice(1)
+    : "";
 
   return (
     <main className="container">
-      <h1>{category?.toUpperCase()}</h1>
+      <h1>{displayTitle}</h1>
       <div className="grid">
         {products.map(product => (
           <ProductCard

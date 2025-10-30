@@ -1,4 +1,3 @@
-// החלף את CartDropdown.tsx:
 
 "use client";
 
@@ -6,26 +5,25 @@ import { useState, useEffect } from "react";
 import { useCart } from "../../contexts/CartContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import styles from "./CartDropdown.module.css"; // ✅ ודא שאתה מייבא את ה-CSS!
+import styles from "./CartDropdown.module.css"; 
 
 export default function CartDropdown() {
-  const { cartItems, totalPrice } = useCart(); // ✅ שימוש ב-totalPrice
+  const { cartItems, totalPrice } = useCart(); 
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  // בכל פעם שהנתיב משתנה, נסגור את העגלה
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
   return (
-    <div className={styles['cart-dropdown-container']}> {/* השתמש בסגנונות מיובאים */}
+    <div className={styles['cart-dropdown-container']}> 
       <button onClick={() => setIsOpen(!isOpen)}>
         🛒 Cart ({cartItems.length})
       </button>
 
       {isOpen && (
-        <div className={styles['cart-dropdown']}> {/* השתמש בסגנונות מיובאים */}
+        <div className={styles['cart-dropdown']}> 
           {cartItems.length === 0 ? (
             <p>Your cart is empty.</p>
           ) : (
